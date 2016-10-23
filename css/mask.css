@@ -1,0 +1,463 @@
+/*      Plugin developed by Samara Dionne
+            http://samaradionne.com/
+
+        If you have any questions, just ask!
+            samaradionne@gmail.com
+            
+       ****          ****             ****   
+      **               ****              **
+      **             ******              **
+      **           *********             **
+      **         ***********             **
+      **        ************             **
+      **        ***********              **
+     **          ********                 **
+    **            ******                   **
+     **            *****    ***           **
+      **            *****     **         **
+      **             **********          **
+      **              *****              **
+      **               ******            **
+      **            **  *** **           **
+      **            *   ***   *          **
+       ****          ****             ****
+
+        
+
+/*************************************************|
+|**************        GLOBAL       **************|
+ *************************************************/
+
+@font-face {
+    font-family: 'BlenderProBook';
+    font-weight: 400;
+    font-style: normal;
+
+    src: url('../fonts/blenderprobook-webfont.woff2') format('woff2'),
+    url('../fonts/blenderprobook-webfont.woff') format('woff');
+}
+
+
+/*************************************|
+|*******        RESET       *********|
+*************************************/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    font-family: 'BlenderProBook',sans-serif;
+    font-size: 100%;
+    vertical-align: baseline;
+    border: 0;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+
+/*************************************|
+|*******     MASK STYLES     *********|
+*************************************/
+
+html {
+    width: 100%;
+    height: 100%;
+    line-height: 1;
+    background: #161616 url(../img/bg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+       -moz-background-size: cover;
+         -o-background-size: cover;
+            background-size: cover;
+}
+
+.mask_Wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: 600px;
+    height: 600px;
+    margin: auto;
+    text-align: center;
+}
+#mask_outline {
+    max-width: 600px;
+    margin-left: 30px;
+}
+
+#step_6, #step_5, #step_4, #step_3, #step_2 {
+    display: none;
+}
+
+
+/*************************************|
+|*******    SONG CONTROLS    *********|
+*************************************/
+
+.song_Wrapper {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    -webkit-transition: all .3s;
+       -moz-transition: all .3s;
+         -o-transition: all .3s;
+            transition: all .3s;
+    text-align: center;
+}
+.song_Controls_Wrapper {
+    margin: 0 auto;
+    display: table;
+}
+.song_Controls_Wrapper span, .full, .sensitivity {
+    padding: 20px 20px 40px;
+    display: table-cell;
+    cursor: pointer;
+    -webkit-transition: all .3s;
+       -moz-transition: all .3s;
+         -o-transition: all .3s;
+            transition: all .3s;
+    vertical-align: middle;
+}
+.song_Controls_Wrapper span:hover {
+    -webkit-transition: all .3s;
+       -moz-transition: all .3s;
+         -o-transition: all .3s;
+            transition: all .3s;
+    opacity: .5;
+}
+.song_Title_Wrapper {
+    margin: 30px auto 0;
+    display: table;
+}
+.full {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+}
+
+#previous, #next {
+    padding: 15px;
+    cursor: pointer;
+}
+.song_Title {
+    position: relative;
+    width: 500px;
+    display: table-cell;
+    overflow: hidden;
+    font-family: 'BlenderProBook',sans-serif;
+    font-size: 21px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    color: #fff;
+}
+.song_Title span {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding-top: 20px;
+    display: table-cell;
+    text-align: center;
+}
+.marquee span {
+    -webkit-transform: translateX(100%);
+       -moz-transform: translateX(100%);
+            transform: translateX(100%);
+    -webkit-animation: marquee 5s linear infinite;
+       -moz-animation: marquee 5s linear infinite;
+            animation: marquee 5s linear infinite;
+}
+
+@-moz-keyframes marquee {
+    0% {
+        -moz-transform: translateX(75%);
+    }
+    100% {
+        -moz-transform: translateX(-75%);
+    }
+}
+@-webkit-keyframes marquee {
+    0% {
+        -webkit-transform: translateX(75%);
+    }
+    100% {
+        -webkit-transform: translateX(-75%);
+    }
+}
+@keyframes marquee {
+    0% {
+        -webkit-transform: translateX(75%); /* Firefox bug fix */
+           -moz-transform: translateX(75%); /* Firefox bug fix */
+                transform: translateX(75%);
+    }
+    100% {
+        -webkit-transform: translateX(-75%); /* Firefox bug fix */
+           -moz-transform: translateX(-75%); /* Firefox bug fix */
+                transform: translateX(-75%);
+    }
+}
+.marquee span:hover {
+    animation-play-state: paused;
+}
+
+.sensitivity {
+    position: absolute;
+    left: 10px;
+    padding: 30px 20px 40px;
+}
+.sensitivity input[type=range] {
+    width: 150px;
+
+    -webkit-appearance: none;
+}
+.sensitivity input[type=range]::-webkit-slider-runnable-track {
+    width: 150px;
+    height: 5px;
+    border: none;
+    background: #656565;
+}
+.sensitivity input[type=range]::-webkit-slider-thumb {
+    width: 16px;
+    height: 16px;
+    margin-top: -4px;
+    cursor: pointer;
+    border-radius: 50%;
+    background: #fff;
+
+    -webkit-appearance: none;
+}
+.sensitivity input[type=range]:focus {
+    outline: none;
+}
+.sensitivity input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #656565;
+}
+.sensitivity input[type=range]::-moz-range-track {
+    width: 150px;
+    height: 5px;
+    border: none;
+    background: #656565;
+}
+.sensitivity input[type=range]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+}
+.sensitivity input[type=range]:-moz-focusring {
+    border: none;
+}
+.sensitivity input[type=range]::-ms-track {
+    width: 150px;
+    height: 5px;
+    color: transparent;
+    border: none;
+    border-color: transparent;
+    background: #656565;
+}
+.sensitivity input[type=range]::-ms-thumb {
+    width: 16px;
+    height: 16px;
+    border: none;
+    border-radius: 50%;
+    background: #fff;
+}
+
+
+/*************************************|
+|*******    UPLOAD POP-UP    *********|
+*************************************/
+
+.upload_Wrapper {
+    display: table-cell;
+    vertical-align: middle;
+}
+.upload {
+    padding-left: 0;
+}
+.upload img {
+    height: 35px;
+}
+
+.upload_Pop {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    text-align: center;
+    background: rgba(0,0,0,.65);
+}
+.upload_Details {
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+    padding: 50px;
+    background: #424242;
+}
+
+.upload_Details span {
+    margin-bottom: 30px;
+    display: block;
+    color: #fff;
+}
+
+#file {
+    width: 100%;
+    margin: 0 0 20px;
+    color: #bbb;
+}
+
+.upload_Pop .close {
+    position: absolute;
+    top: -15px;
+    right: -5px;
+    padding: 20px 20px 10px;
+    font-size: 40px;
+    cursor: pointer;
+    text-align: right;
+}
+
+.upload_Pop input[type=text] {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    width: 100%;
+    padding: 10px 15px;
+}
+
+.upload_Pop input[type=button] {
+    padding: 5px 15px;
+}
+
+#drop_zone {
+    padding: 30px;
+    text-align: center;
+    color: #bbb;
+    border: 2px dashed #bbb;
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+}
+#drop_zone.hover {
+    background: rgba(255, 255, 255, .35);
+}
+
+.sc_upload {
+    width: 100%;
+    display: table;
+}
+.sc_upload input {
+    width: 50% !important;
+    display: table-cell;
+}
+.upload_Pop .btn {
+    padding: 10px 20px 10px 20px;
+    font-family: 'BlenderProBook';
+    font-size: 20px;
+    cursor: pointer;
+    -webkit-transition: all .3s;
+       -moz-transition: all .3s;
+         -o-transition: all .3s;
+            transition: all .3s;
+    text-transform: uppercase;
+    color: #424242;
+    border: 1px solid #424242;
+    background: #fff;
+}
+
+.upload_Pop .btn:hover {
+    text-decoration: none;
+    background: #d6e7f7;
+}
+.SC_Wrapper {
+    padding-top: 30px;
+    display: none;
+}
+.up_Wrapper {
+    padding-top: 30px;
+}
+.upload_Pop .submit {
+    margin-top: 30px;
+}
+.upload_Pop .error, .upload_Pop .error_type {
+    margin-top: 30px;
+    display: none;
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fd4848;
+}
+
+
+/*************************************|
+|*******       SUPPORT       *********|
+*************************************/
+
+.support_Table {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    text-align: center;
+    vertical-align: middle;
+}
+.support {
+    display: table-cell;
+    font-size: 20px;
+    vertical-align: middle;
+    color: #fff;
+}
+
+/*************************************|
+|*******        MOBILE       *********|
+*************************************/
+
+@media (max-width: 600px) {
+    .mask_Wrapper {
+        height: auto;
+        margin-top: 40px;
+    }
+    .mask_Wrapper, .song_Wrapper, .sensitivity, .full {
+        position: static;
+    }
+    .sensitivity, .song_Controls_Wrapper {
+        width: 90%;
+        display: block;
+    }
+    .sensitivity input[type=range] {
+        width: 100%;
+    }
+    .song_Controls_Wrapper span, .full {
+        padding: 5%;
+        display: inline-block;
+    }
+}
